@@ -262,6 +262,21 @@ textarea:focus {
 .hint.ok { color: var(--success); }
 .hint.error { color: #B4432E; }
 
+.tld-tip {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  background: var(--cobalt-dim);
+  border: 1px solid var(--cobalt);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 0 0 4px;
+}
+
+.tld-tip strong {
+  color: var(--navy);
+  font-weight: 600;
+}
+
 .chip-row {
   display: flex;
   flex-wrap: wrap;
