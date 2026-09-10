@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Site Works — get a website estimate</title>
+<meta name="description" content="Tell us the domain, the term, and the job — get an estimate back in a minute.">
+<meta name="theme-color" content="#1C2B45">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-row">
+      <span class="wordmark">Site Works</span>
+      <span class="step-count" id="stepCount">Step 1 of 6</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <nav class="stages" aria-label="Build stages">
+      <ol id="stageList">
+        <li data-step="1" class="stage active"><span class="stage-num">01</span><span class="stage-name">Domain</span></li>
+        <li data-step="2" class="stage"><span class="stage-num">02</span><span class="stage-name">Term</span></li>
+        <li data-step="3" class="stage"><span class="stage-num">03</span><span class="stage-name">Blueprint</span></li>
+        <li data-step="4" class="stage"><span class="stage-num">04</span><span class="stage-name">Materials</span></li>
+        <li data-step="5" class="stage"><span class="stage-num">05</span><span class="stage-name">Estimate</span></li>
+        <li data-step="6" class="stage"><span class="stage-num">06</span><span class="stage-name">Send it</span></li>
+      </ol>
+    </nav>
+    <div class="setup-banner" id="setupBanner" hidden>
+      Backend not connected yet — set <code>API_BASE</code> in
+      <code>frontend/config.js</code> to your Cloudflare Tunnel URL. Pricing
+      and submissions won't work until then.
+    </div>
+  </header>
+
+  <main class="deck" id="deck">
+
+    <div class="ad-inline" id="adSlot">
+      <div id="adBody"></div>
+    </div>
+
+    <!-- Step 1: Domain -->
+    <section class="step active" data-step="1">
+      <div class="step-body">
+        <h1>What's the site called?</h1>
+        <p class="lede">Give us the domain you want — we'll price it against live registrar rates.</p>
+        <label class="field">
+          <span class="field-label">Domain name</span>
+          <input type="text" id="domainInput" placeholder="yourbusiness.com" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="url">
+        </label>
+        <p class="hint" id="domainHint">&nbsp;</p>
+      </div>
+      <div class="actions">
+        <button class="btn primary full" id="step1Continue" disabled>Continue</button>
+      </div>
+    </section>
+
+    <!-- Step 2: Term -->
+    <section class="step" data-step="2" hidden>
+      <div class="step-body">
+        <h1>How long do you want it registered?</h1>
+        <p class="lede">Longer terms lock in today's rate and save you a renewal or two.</p>
+        <div class="chip-row" id="termChips" role="group" aria-label="Registration term">
+          <button type="button" class="chip" data-years="1">1 year</button>
+          <button type="button" class="chip" data-years="2">2 years</button>
+          <button type="button" class="chip" data-years="3">3 years</button>
+          <button type="button" class="chip" data-years="5">5 years</button>
+          <button type="button" class="chip" data-years="10">10 years</button>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" data-back="1">Back</button>
+        <button class="btn primary" id="step2Continue" disabled>Continue</button>
+      </div>
+    </section>
+
+    <!-- Step 3: Blueprint (what it needs to do / look like) -->
+    <section class="step" data-step="3" hidden>
+      <div class="step-body">
+        <h1>What does the site need to do?</h1>
+        <p class="lede">A few lines is plenty — what it's for, and how it should feel.</p>
+        <label class="field">
+          <span class="field-label">Purpose &amp; look</span>
+          <textarea id="needsInput" rows="5" placeholder="e.g. Booking page for a hair salon, calm and minimal, needs online payments and a photo gallery."></textarea>
+        </label>
+        <span class="field-label chip-label">Nearest style (optional)</span>
+        <div class="chip-row" id="styleChips" role="group" aria-label="Style">
+          <button type="button" class="chip" data-style="Minimal">Minimal</button>
+          <button type="button" class="chip" data-style="Bold">Bold</button>
+          <button type="button" class="chip" data-style="Playful">Playful</button>
+          <button type="button" class="chip" data-style="Corporate">Corporate</button>
+          <button type="button" class="chip" data-style="Portfolio">Portfolio</button>
+          <button type="button" class="chip" data-style="Online store">Online store</button>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" data-back="2">Back</button>
+        <button class="btn primary" id="step3Continue" disabled>Continue</button>
+      </div>
+    </section>
+
+    <!-- Step 4: Materials (photos + inclusions) -->
+    <section class="step" data-step="4" hidden>
+      <div class="step-body">
+        <h1>Send over your materials.</h1>
+        <p class="lede">Photos of the business, product, or space — plus anything else you want built in.</p>
+        <label class="field">
+          <span class="field-label">Photos</span>
+          <label class="photo-picker" for="photoInput">
+            <span>Take or choose photos</span>
+          </label>
+          <input type="file" id="photoInput" accept="image/*" capture="environment" multiple hidden>
+        </label>
+        <div class="thumbs" id="thumbRow"></div>
+        <label class="field">
+          <span class="field-label">Other inclusions (optional)</span>
+          <textarea id="inclusionsInput" rows="3" placeholder="e.g. a blog, a booking form, an online store, multiple languages"></textarea>
+        </label>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" data-back="3">Back</button>
+        <button class="btn primary" id="step4Continue">Continue</button>
+      </div>
+    </section>
+
+    <!-- Step 5: Estimate -->
+    <section class="step" data-step="5" hidden>
+      <div class="step-body">
+        <h1>Here's the estimate.</h1>
+        <p class="lede">Domain pricing pulled from the registrar; the build fee is ours.</p>
+        <div class="ledger" id="ledger">
+          <div class="ledger-row"><span>Loading current registrar pricing…</span></div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" data-back="4">Back</button>
+        <button class="btn primary" id="step5Continue">Continue</button>
+      </div>
+    </section>
+
+    <!-- Step 6: Send it -->
+    <section class="step" data-step="6" hidden>
+      <div class="step-body">
+        <h1>Anything else we should know?</h1>
+        <p class="lede">Add any specifics, then leave your email so we can send back a firm quote.</p>
+        <label class="field">
+          <span class="field-label">Anything else (optional)</span>
+          <textarea id="notesInput" rows="4" placeholder="Deadlines, must-haves, existing branding, competitor sites you like…"></textarea>
+        </label>
+        <label class="field">
+          <span class="field-label">Email address</span>
+          <input type="email" id="emailInput" placeholder="you@yourbusiness.com" autocomplete="email" inputmode="email">
+        </label>
+        <p class="hint" id="submitHint">&nbsp;</p>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" data-back="5">Back</button>
+        <button class="btn primary" id="submitBtn">Send request</button>
+      </div>
+    </section>
+
+    <!-- Step 7: Confirmation -->
+    <section class="step" data-step="7" hidden>
+      <div class="step-body">
+        <h1>Sent.</h1>
+        <p class="lede" id="confirmText">We've got it — a proper quote will land in your inbox shortly.</p>
+        <div class="ledger" id="refBox"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

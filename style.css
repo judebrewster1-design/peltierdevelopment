@@ -1,0 +1,475 @@
+:root {
+  --paper: #EEF1F5;
+  --surface: #FFFFFF;
+  --ink: #17212E;
+  --ink-soft: #556172;
+  --navy: #1C2B45;
+  --cobalt: #2E5FE0;
+  --cobalt-dim: #E5EBFC;
+  --amber: #C97A1E;
+  --amber-dim: #FBEEDD;
+  --line: #D7DDE4;
+  --success: #2F7D53;
+  --radius-card: 16px;
+  --radius-chip: 10px;
+  --topbar-h: 0px; /* measured by nothing; topbar is sticky and sized by content */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-image:
+    linear-gradient(rgba(28, 43, 69, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28, 43, 69, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1.35rem;
+  margin: 0 0 0.35em;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+/* ---------- App shell (mobile-first) ---------- */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--paper);
+  padding: calc(12px + var(--safe-top)) 16px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.wordmark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--navy);
+}
+
+.step-count {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.progress-track {
+  height: 4px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 16.66%;
+  background: var(--cobalt);
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+/* Horizontal stepper pills — the primary (only) stepper UI, built for a thumb-scrollable strip */
+.stages ol {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 2px;
+  gap: 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.stages ol::-webkit-scrollbar { display: none; }
+
+.stage {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-soft);
+}
+
+.stage-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+}
+
+.stage-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.stage.active {
+  border-color: var(--cobalt);
+  background: var(--cobalt-dim);
+  color: var(--navy);
+}
+
+.stage.complete {
+  border-color: var(--success);
+  color: var(--navy);
+}
+
+.setup-banner {
+  background: var(--amber-dim);
+  border: 1px solid var(--amber);
+  color: var(--navy);
+  font-size: 0.82rem;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.setup-banner code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* ---------- Deck / steps ---------- */
+
+.deck {
+  flex: 1;
+  padding: 16px 16px calc(24px + var(--safe-bottom));
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ad-inline {
+  margin-bottom: 14px;
+}
+
+.step {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 20px 18px calc(84px + var(--safe-bottom));
+  animation: rise 0.22s ease;
+  position: relative;
+  min-height: calc(100dvh - 190px);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step { animation: none; }
+}
+
+.lede {
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+  max-width: 46ch;
+  font-size: 0.95rem;
+}
+
+.field {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.chip-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 8px;
+  display: block;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 13px 14px;
+  min-height: 48px;
+  resize: vertical;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 1px;
+  background: var(--surface);
+}
+
+.hint {
+  font-size: 0.87rem;
+  color: var(--ink-soft);
+  min-height: 1.3em;
+  margin: -4px 0 12px;
+}
+
+.hint.ok { color: var(--success); }
+.hint.error { color: #B4432E; }
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.chip {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.92rem;
+  padding: 11px 16px;
+  min-height: 46px;
+  border-radius: var(--radius-chip);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.chip.selected {
+  background: var(--cobalt-dim);
+  border-color: var(--cobalt);
+  color: var(--navy);
+  font-weight: 500;
+}
+
+/* Mobile-native photo picker — a full-width tap target instead of the
+   default browser file-input chrome, wired to the same hidden input. */
+.photo-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  border: 1.5px dashed var(--line);
+  border-radius: 10px;
+  color: var(--cobalt);
+  font-weight: 500;
+  font-size: 0.94rem;
+  background: var(--cobalt-dim);
+  cursor: pointer;
+  text-align: center;
+}
+
+.photo-picker:active {
+  background: var(--cobalt-dim);
+  border-color: var(--cobalt);
+}
+
+.thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 18px;
+}
+
+.thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+
+/* ---------- Sticky bottom action bar ----------
+   Only the currently visible step's .actions is shown, so pinning it to
+   the viewport bottom gives every step its own thumb-reachable action
+   row without any extra markup or script changes. */
+.actions {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 16px calc(12px + var(--safe-bottom));
+  background: linear-gradient(to top, var(--paper) 65%, rgba(238, 241, 245, 0));
+}
+
+.actions::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--line);
+}
+
+.actions .btn {
+  flex: 1;
+}
+
+.actions .btn.ghost {
+  flex: 0 0 auto;
+  min-width: 92px;
+}
+
+.btn {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 500;
+  padding: 13px 20px;
+  min-height: 50px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: var(--navy);
+  color: #fff;
+}
+
+.btn.primary:active { background: var(--cobalt); }
+
+.btn.primary:disabled {
+  background: var(--line);
+  color: var(--ink-soft);
+  cursor: not-allowed;
+}
+
+.btn.ghost {
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--ink-soft);
+}
+
+.btn.ghost:active { border-color: var(--navy); color: var(--navy); }
+
+/* Estimate ledger */
+.ledger {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.ledger-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.87rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.ledger-row:last-child { border-bottom: none; }
+
+.ledger-row.total {
+  background: var(--amber-dim);
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 0.98rem;
+}
+
+.ledger-row .label { color: var(--ink-soft); font-family: 'IBM Plex Sans', sans-serif; }
+.ledger-row.total .label { color: var(--navy); }
+
+.ledger-note {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin: 10px 0 0;
+}
+
+/* ---------- Ad slot ----------
+   Kept as a plain in-flow card (no dismiss control) so the AdSense
+   integration stays intact without floating over the sticky action bar. */
+.ad-inline {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 4px;
+}
+
+.ad-placeholder {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-align: center;
+  padding: 12px 6px;
+}
+
+/* ---------- Larger screens: same shell, roomier canvas ---------- */
+@media (min-width: 720px) {
+  .topbar-row,
+  .deck {
+    max-width: 640px;
+  }
+
+  .topbar {
+    padding-left: calc(50% - 320px);
+    padding-right: calc(50% - 320px);
+  }
+
+  .stages { max-width: 640px; margin: 0 auto; }
+  .topbar-row { margin: 0 auto 10px; }
+  .progress-track { max-width: 640px; margin: 0 auto 10px; }
+
+  .actions {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 640px;
+  }
+
+  h1 { font-size: 1.55rem; }
+
+  .step { min-height: 0; padding-bottom: 90px; }
+}
