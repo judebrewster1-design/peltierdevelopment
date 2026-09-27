@@ -20,7 +20,7 @@ const API_BASE = (function () {
   if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     return "http://localhost:5000";
   }
-  return "https://REPLACE-WITH-YOUR-CLOUDFLARE-TUNNEL-URL";
+  return "https://movers-ability-ads-five.trycloudflare.com";
 })();
 
 // ---------------------------------------------------------------- auth state
