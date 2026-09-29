@@ -168,13 +168,13 @@ async function run() {
   check("plan page shows all three plan cards", window.document.querySelectorAll(".plan-card").length === 3);
 
   // ---- Public storefront reflects the customization we just saved ----
-  window.location.hash = `#/store/${uniqueName}`;
+  window.location.hash = `#/${uniqueName}`;
   await sleep(400);
   check("public storefront shows the tagline we saved", window.document.body.textContent.includes("Fresh from jsdom"));
   check("public storefront lists the product", window.document.body.textContent.includes("Jsdom Widget"));
 
   // ---- Checkout flow (order creation, no real Helcim payment) ----
-  window.location.hash = `#/store/${uniqueName}/checkout`;
+  window.location.hash = `#/${uniqueName}/checkout`;
   await sleep(400);
   const qtyInput = window.document.querySelector("[data-product-id]");
   check("checkout page shows a quantity input for the product", !!qtyInput);
@@ -185,7 +185,7 @@ async function run() {
   window.document.querySelector('[name="payment_method"][value="paypal"]').checked = true;
   window.document.querySelector("#checkoutForm").dispatchEvent(new window.Event("submit", { bubbles: true, cancelable: true }));
   await sleep(400);
-  check("checkout created an order and navigated to its pay page", /#\/store\/.+\/order\/\d+\/pay/.test(window.location.hash), window.location.hash);
+  check("checkout created an order and navigated to its pay page", /#\/[a-z]+\/order\/\d+\/pay/.test(window.location.hash), window.location.hash);
   await sleep(600);
   const ppLink = window.document.querySelector('a[href*="paypal.me"]');
   check("pay page shows PayPal button with exact amount filled in", ppLink && ppLink.href.includes("jsdomshop/39.98CAD"), ppLink && ppLink.href);
