@@ -447,3 +447,8 @@ input:focus, select:focus, textarea:focus { border-color: var(--cold); backgroun
 
 .owner-login-step { max-width: 380px; text-align: center; }
 .owner-login-mark { width: 52px; height: 52px; margin: 0 auto 1rem; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 1.4rem; background: linear-gradient(160deg, var(--heat), var(--cold)); color: #fff; box-shadow: 0 8px 24px -10px rgba(227,28,61,.5); }
+
+.guide-steps { margin: .8rem 0; padding-left: 1.4rem; }
+.guide-steps li { margin-bottom: .7rem; line-height: 1.55; font-size: .92rem; }
+.guide-steps li:last-child { margin-bottom: 0; }
+.guide-steps code { font-family: "IBM Plex Mono", monospace; font-size: .85em; background: rgba(255,255,255,.06); padding: .1rem .35rem; border-radius: 4px; }
