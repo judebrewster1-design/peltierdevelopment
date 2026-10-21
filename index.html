@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Peltier Development: build your own store, keep what you earn</title>
+<meta name="description" content="Peltier Development lets anyone launch a storefront at yourshop.peltdev.com. One setup fee, no per-sale cut from us. You keep what you earn.">
+<meta name="theme-color" content="#0A0E14">
+<link rel="icon" type="image/png" href="static/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link id="storeFontLink" rel="stylesheet" href="">
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+<div class="cutoff-banner" id="cutoffBanner" hidden></div>
+
+<a class="skip-link" href="#app">Skip to content</a>
+<header class="site-nav">
+  <a class="brand" href="#/"><img class="brand-logo" src="static/logo.png" alt="" width="26" height="40"><span>Peltier Development</span></a>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="siteNav"><span></span><span></span><span></span></button>
+  <nav id="siteNav" aria-label="Main">
+    <a href="#/story">Our Story</a>
+    <a href="#/support">Support</a>
+    <a href="#/login" id="navLogin">Log in</a>
+    <a href="#/create" class="nav-cta" id="navSignup">Start your store</a>
+  </nav>
+</header>
+
+<div class="flash-stack" id="flashStack" role="status" aria-live="polite"></div>
+
+<main id="app">
+  <p class="muted" style="text-align:center;padding:3rem 0;">Loading…</p>
+</main>
+
+<footer class="site-footer" id="siteFooter">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="#/"><img class="brand-logo" src="static/logo.png" alt="" width="26" height="40"><span>Peltier Development</span></a>
+      <p>Storefronts where sellers keep what they earn. Payments go straight to you. We never see card or bank details.</p>
+    </div>
+    <div class="footer-col"><div class="footer-h">Platform</div><a href="#/create">Start your store</a><a href="#/story">Our Story</a><a href="#/login">Log in</a></div>
+    <div class="footer-col"><div class="footer-h">Help</div><a href="#/support">Contact support</a><a href="#/terms">Terms</a><a href="#/privacy">Privacy</a></div>
+  </div>
+  <div class="footer-bottom">&copy; <span id="yr"></span> Peltier Development. A student-run project, independent from Junior Achievement. Prices in CAD.</div>
+</footer>
+
+<script src="demo-api.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
